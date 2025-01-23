@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HMU-OS</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="desktop">
+    <!-- Иконки на рабочем столе -->
+    <div class="icon" onclick="openWindow('entertainmentWindow')">
+      <img src="photo_5_2025-01-23_19-44-17.jpg" alt="Развлечения">
+      <span>Развлечения</span>
+    </div>
+    <div class="icon" onclick="openWindow('telegramWindow')">
+      <img src="teleg.jpg" alt="Telegram">
+      <span>Telegram</span>
+    </div>
+    <div class="icon" onclick="openWindow('snakeWindow')">
+      <img src="zmey.jpg" alt="Змейка">
+      <span>Змейка</span>
+    </div>
+    <div class="icon" onclick="openWindow('minesweeperWindow')">
+      <img src="1.jpg" alt="Сапер">
+      <span>Сапер</span>
+    </div>
+    <div class="icon" onclick="openWindow('paintWindow')">
+      <img src="paint.jpg" alt="Paint">
+      <span>Paint</span>
+    </div>
+    <div class="icon" onclick="openWindow('aboutWindow')">
+      <img src="hmu.jpg" alt="О нас">
+      <span>О нас</span>
+    </div>
+    <div class="icon" onclick="openWindow('osWindow')">
+      <img src="h-os.jpg" alt="OS">
+      <span>OS</span>
+    </div>
+  </div>
+
+  <!-- Окно "Развлечения" -->
+  <div class="window" id="entertainmentWindow">
+    <div class="window-header">
+      <span>Развлечения</span>
+      <button onclick="closeWindow('entertainmentWindow')">×</button>
+    </div>
+    <div class="window-content">
+      <div class="oval-button" onclick="openLink('https://0pull.github.io/0pull-snake/')">
+        <img src="icon1.png" alt="Иконка 1">
+        <span>0pull-snake</span>
+      </div>
+      <div class="oval-button" onclick="openLink('https://0pull.github.io/UDTS/')">
+        <img src="icon2.png" alt="Иконка 2">
+        <span>text-game(dev)</span>
+      </div>
+      <!-- Добавь еще 4 кнопки -->
+    </div>
+  </div>
+
+  <!-- Окно "Telegram" -->
+  <div class="window" id="telegramWindow">
+    <div class="window-header">
+      <span>Telegram</span>
+      <button onclick="closeWindow('telegramWindow')">×</button>
+    </div>
+    <div class="window-content">
+      <div class="telegram-icon" onclick="openLink('https://t.me/labhmu')">
+        <img src="labh.jpg" alt="Иконка 1">
+        <span>LabHmu</span>
+      </div>
+      <div class="telegram-icon" onclick="openLink('https://t.me/hmu_mad')">
+        <img src="hmum.jpg" alt="Иконка 2">
+        <span>HMUMAD</span>
+      </div>
+      <div class="telegram-icon" onclick="openLink('https://t.me/SenorTonto')">
+        <img src="tont.jpg" alt="Иконка 2">
+        <span>Senor Tonto</span>
+      </div>
+      <div class="telegram-icon" onclick="openLink('https://t.me/+gadoxqb3dqk1ZGU1')">
+        <img src="quelli.jpg" alt="Иконка 2">
+        <span>quelli life</span>
+      </div>
+      <div class="telegram-icon" onclick="openLink('https://t.me/+2hoJHnHAESA2Yzk1')">
+        <img src="earn.jpg" alt="Иконка 2">
+        <span>online income [G. Q. A.]</span>
+      </div>
+      <div class="telegram-icon" onclick="openLink('https://t.me/+d_tqXgb7AhYyZjli')">
+        <img src="shop.jpg" alt="Иконка 2">
+        <span>Shop</span>
+      </div>
+      <!-- Добавь еще 6 иконок -->
+    </div>
+  </div>
+
+  <!-- Окно "Змейка" -->
+  <div class="window" id="snakeWindow">
+    <div class="window-header">
+      <span>Змейка</span>
+      <button onclick="closeWindow('snakeWindow')">×</button>
+    </div>
+    <div class="window-content">
+      <canvas id="snakeGame" width="400" height="400"></canvas>
+      <button onclick="resetSnakeGame()">Сбросить</button>
+    </div>
+  </div>
+
+  <!-- Окно "Сапер" -->
+  <div class="window" id="minesweeperWindow">
+    <div class="window-header">
+      <span>Сапер</span>
+      <button onclick="closeWindow('minesweeperWindow')">×</button>
+    </div>
+    <div class="window-content">
+      <div id="minesweeperGrid"></div>
+      <button onclick="resetMinesweeper()">Сбросить</button>
+    </div>
+  </div>
+
+  <!-- Окно "Paint" -->
+  <div class="window" id="paintWindow">
+    <div class="window-header">
+      <span>Paint</span>
+      <button onclick="closeWindow('paintWindow')">×</button>
+    </div>
+    <div class="window-content">
+      <canvas id="paintCanvas" width="600" height="400"></canvas>
+      <button onclick="clearCanvas()">Очистить</button>
+    </div>
+  </div>
+
+  <!-- Окно "О нас" -->
+  <div class="window" id="aboutWindow">
+    <div class="window-header">
+      <span>О нас</span>
+      <button onclick="closeWindow('aboutWindow')">×</button>
+    </div>
+    <div class="window-content">
+      <p>Здесь могла быть Ваша реклама</p>
+    </div>
+  </div>
+
+  <!-- Окно "OS" -->
+  <div class="window" id="osWindow">
+    <div class="window-header">
+      <span>OS</span>
+      <button onclick="closeWindow('osWindow')">×</button>
+    </div>
+    <div class="window-content">
+      <p>Welcome to HMU-OS, an operating system that redefines the meaning of the word "meaningless." Designed with no clear purpose or functionality, HMU-OS is the epitome of digital mediocrity. Its interface is a monotonous black canvas, devoid of icons, menus, or any interactivity. The system does not support applications, file management, or even basic tasks such as timing. In fact, HMU-OS doesn't even have a clock. It just exists, consuming resources and doing absolutely nothing of value.
+        </p>
+        <p>
+        HMU-OS has a revolutionary "standby mode" that is constantly on, ensuring that users never have to worry about productivity or engagement. The only "trick" of the system is the blinking cursor in the upper-left corner of the screen, which only serves to remind you that the system is actually running. There are no updates, no security fixes, no support — because, frankly, there is nothing to support.
+        </p>
+        <p>
+        HMU-OS is ideal for those who like to stare at the screen and reflect on the futility of existence. It's not just an operating system; it's a philosophical statement about the meaninglessness of technology.
+        </p>
+        <p>
+        ---
+        </p>
+        **Minimum system requirements:**
+        </p>
+        - Processor: 1 MHz (single core, no multitasking)
+        </p>
+        <p>
+        - RAM size: 16 bytes (yes, bytes)
+        </p>
+        <p>
+        - Memory capacity: 1 KB (for the entire operating system)
+        </p>
+        <p>
+        - Display: 1-bit monochrome (purple or off)
+        </p>
+        <p>
+        - Input: None (keyboard and mouse are not supported)
+        </p>
+        <p>
+        - Output: No (no sound, no visual effects except blinking cursor)
+        </p>
+        <p>
+        - Power: One potato (optional)</p>
+        </p>
+    </div>
+  </div>
+
+  <!-- Панель задач -->
+  <div class="taskbar">
+    <button class="start-button" onclick="toggleStartMenu()">Пуск</button>
+    <div class="start-menu" id="startMenu">
+      <ul>
+        <li onclick="openWindow('entertainmentWindow')">Развлечения</li>
+        <li onclick="openWindow('telegramWindow')">Telegram</li>
+        <li onclick="openWindow('snakeWindow')">Змейка</li>
+        <li onclick="openWindow('minesweeperWindow')">Сапер</li>
+        <li onclick="openWindow('paintWindow')">Paint</li>
+        <li onclick="openWindow('aboutWindow')">О нас</li>
+        <li onclick="openWindow('osWindow')">OS</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Звук щелчка -->
+  <audio id="clickSound" src="click.mp3"></audio>
+
+  <script src="script.js"></script>
+</body>
+</html>
