@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="desktop">
+  <div class="desktop" id="desktop">
     <!-- Иконки на рабочем столе -->
     <div class="icon" onclick="openWindow('entertainmentWindow')">
       <img src="photo_5_2025-01-23_19-44-17.jpg" alt="Развлечения">
@@ -29,6 +29,14 @@
     <div class="icon" onclick="openWindow('paintWindow')">
       <img src="paint.jpg" alt="Paint">
       <span>Paint</span>
+    </div>
+    <div class="icon" onclick="openWindow('notepadWindow')">
+      <img src="blokno.jpg" alt="Блокнот">
+      <span>Блокнот</span>
+    </div>
+    <div class="icon" onclick="openWindow('musicWindow')">
+      <img src="mus.jpg" alt="Музыка">
+      <span>Музыка</span>
     </div>
     <div class="icon" onclick="openWindow('aboutWindow')">
       <img src="hmu.jpg" alt="О нас">
@@ -55,7 +63,6 @@
         <img src="icon2.png" alt="Иконка 2">
         <span>text-game(dev)</span>
       </div>
-      <!-- Добавь еще 4 кнопки -->
     </div>
   </div>
 
@@ -90,7 +97,6 @@
         <img src="shop.jpg" alt="Иконка 2">
         <span>Shop</span>
       </div>
-      <!-- Добавь еще 6 иконок -->
     </div>
   </div>
 
@@ -102,7 +108,11 @@
     </div>
     <div class="window-content">
       <canvas id="snakeGame" width="400" height="400"></canvas>
-      <button onclick="resetSnakeGame()">Сбросить</button>
+      <div class="snake-controls">
+        <button onclick="resetSnakeGame()">Сбросить</button>
+        <span>Счет: <span id="snakeScore">0</span></span>
+        <span>Уровень: <span id="snakeLevel">1</span></span>
+      </div>
     </div>
   </div>
 
@@ -114,7 +124,9 @@
     </div>
     <div class="window-content">
       <div id="minesweeperGrid"></div>
-      <button onclick="resetMinesweeper()">Сбросить</button>
+      <div class="minesweeper-controls">
+        <button onclick="resetMinesweeper()">Сбросить</button>
+      </div>
     </div>
   </div>
 
@@ -125,8 +137,49 @@
       <button onclick="closeWindow('paintWindow')">×</button>
     </div>
     <div class="window-content">
+      <div class="paint-controls">
+        <input type="color" id="paintColor" value="#ffffff">
+        <input type="range" id="brushSize" min="1" max="20" value="5">
+        <button onclick="clearCanvas()">Очистить</button>
+      </div>
       <canvas id="paintCanvas" width="600" height="400"></canvas>
-      <button onclick="clearCanvas()">Очистить</button>
+    </div>
+  </div>
+
+  <!-- Окно "Блокнот" -->
+  <div class="window" id="notepadWindow">
+    <div class="window-header">
+      <span>Блокнот</span>
+      <button onclick="closeWindow('notepadWindow')">×</button>
+    </div>
+    <div class="window-content">
+      <textarea id="notepadText" placeholder="Введите текст..."></textarea>
+      <button onclick="saveNotepad()">Сохранить</button>
+      <button onclick="loadNotepad()">Загрузить</button>
+    </div>
+  </div>
+
+  <!-- Окно "Музыка" -->
+  <div class="window" id="musicWindow">
+    <div class="window-header">
+      <span>Музыка</span>
+      <button onclick="closeWindow('musicWindow')">×</button>
+    </div>
+    <div class="window-content">
+      <div class="music-cover">
+        <img id="musicCover" src="" alt="Обложка">
+      </div>
+      <div id="musicTitle">Название трека</div>
+      <div class="music-timeline">
+        <input type="range" id="musicProgress" min="0" max="100" value="0">
+        <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
+      </div>
+      <div class="music-controls">
+        <button onclick="prevTrack()">Назад</button>
+        <button onclick="togglePlay()" id="playPauseBtn">⏵</button>
+        <button onclick="nextTrack()">Вперед</button>
+        <button onclick="shuffleTracks()">Случайно</button>
+      </div>
     </div>
   </div>
 
@@ -148,39 +201,20 @@
       <button onclick="closeWindow('osWindow')">×</button>
     </div>
     <div class="window-content">
-      <p>Welcome to HMU-OS, an operating system that redefines the meaning of the word "meaningless." Designed with no clear purpose or functionality, HMU-OS is the epitome of digital mediocrity. Its interface is a monotonous black canvas, devoid of icons, menus, or any interactivity. The system does not support applications, file management, or even basic tasks such as timing. In fact, HMU-OS doesn't even have a clock. It just exists, consuming resources and doing absolutely nothing of value.
-        </p>
-        <p>
-        HMU-OS has a revolutionary "standby mode" that is constantly on, ensuring that users never have to worry about productivity or engagement. The only "trick" of the system is the blinking cursor in the upper-left corner of the screen, which only serves to remind you that the system is actually running. There are no updates, no security fixes, no support — because, frankly, there is nothing to support.
-        </p>
-        <p>
-        HMU-OS is ideal for those who like to stare at the screen and reflect on the futility of existence. It's not just an operating system; it's a philosophical statement about the meaninglessness of technology.
-        </p>
-        <p>
-        ---
-        </p>
-        **Minimum system requirements:**
-        </p>
-        - Processor: 1 MHz (single core, no multitasking)
-        </p>
-        <p>
-        - RAM size: 16 bytes (yes, bytes)
-        </p>
-        <p>
-        - Memory capacity: 1 KB (for the entire operating system)
-        </p>
-        <p>
-        - Display: 1-bit monochrome (purple or off)
-        </p>
-        <p>
-        - Input: None (keyboard and mouse are not supported)
-        </p>
-        <p>
-        - Output: No (no sound, no visual effects except blinking cursor)
-        </p>
-        <p>
-        - Power: One potato (optional)</p>
-        </p>
+      <p>Welcome to HMU-OS, an operating system that redefines the meaning of the word "meaningless." Designed with no clear purpose or functionality, HMU-OS is the epitome of digital mediocrity. Its interface is a monotonous black canvas, devoid of icons, menus, or any interactivity. The system does not support applications, file management, or even basic tasks such as timing. In fact, HMU-OS doesn't even have a clock. It just exists, consuming resources and doing absolutely nothing of value.</p>
+      <p>HMU-OS has a revolutionary "standby mode" that is constantly on, ensuring that users never have to worry about productivity or engagement. The only "trick" of the system is the blinking cursor in the upper-left corner of the screen, which only serves to remind you that the system is actually running. There are no updates, no security fixes, no support — because, frankly, there is nothing to support.</p>
+      <p>HMU-OS is ideal for those who like to stare at the screen and reflect on the futility of existence. It's not just an operating system; it's a philosophical statement about the meaninglessness of technology.</p>
+      <p>---</p>
+      <p><strong>Minimum system requirements:</strong></p>
+      <ul>
+        <li>Processor: 1 MHz (single core, no multitasking)</li>
+        <li>RAM size: 16 bytes (yes, bytes)</li>
+        <li>Memory capacity: 1 KB (for the entire operating system)</li>
+        <li>Display: 1-bit monochrome (purple or off)</li>
+        <li>Input: None (keyboard and mouse are not supported)</li>
+        <li>Output: No (no sound, no visual effects except blinking cursor)</li>
+        <li>Power: One potato (optional)</li>
+      </ul>
     </div>
   </div>
 
@@ -194,14 +228,23 @@
         <li onclick="openWindow('snakeWindow')">Змейка</li>
         <li onclick="openWindow('minesweeperWindow')">Сапер</li>
         <li onclick="openWindow('paintWindow')">Paint</li>
+        <li onclick="openWindow('notepadWindow')">Блокнот</li>
+        <li onclick="openWindow('musicWindow')">Музыка</li>
         <li onclick="openWindow('aboutWindow')">О нас</li>
         <li onclick="openWindow('osWindow')">OS</li>
+        <li onclick="changeWallpaper()">Сменить обои</li>
       </ul>
     </div>
   </div>
 
-  <!-- Звук щелчка -->
+  <!-- Звуки -->
   <audio id="clickSound" src="click.mp3"></audio>
+  <audio id="eatSound" src="eat.mp3"></audio>
+  <audio id="gameOverSound" src="game-over.mp3"></audio>
+  <audio id="mineSound" src="mine.mp3"></audio>
+
+  <!-- Музыкальный плеер -->
+  <audio id="musicPlayer"></audio>
 
   <script src="script.js"></script>
 </body>

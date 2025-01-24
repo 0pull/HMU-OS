@@ -1,141 +1,224 @@
 body {
-    margin: 0;
-    font-family: 'Press Start 2P', cursive;
-    background: black;
-    color: white;
-    height: 100vh;
-    overflow: hidden;
-  }
-  
-  .desktop {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 20px;
-  }
-  
-  .icon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 10px;
-    cursor: pointer;
-  }
-  
-  .icon img {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .window {
-    position: absolute;
-    top: 50px;
-    left: 50px;
-    width: 800px;
-    background: black;
-    border: 2px solid purple;
-    box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3);
-    display: none;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-  }
-  
-  .window.visible {
-    display: block;
-    opacity: 1;
-  }
-  
-  .window-header {
-    background: purple;
-    padding: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .window-content {
-    padding: 10px;
-  }
-  
-  .oval-button, .telegram-icon {
-    display: flex;
-    align-items: center;
-    margin: 10px 0;
-    cursor: pointer;
-  }
-  
-  .oval-button img, .telegram-icon img {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-  }
-  
-  .taskbar {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    display: flex;
-    align-items: center;
-    padding: 5px;
-  }
-  
-  .start-button {
-    background: purple;
-    border: none;
-    color: white;
-    font-family: 'Press Start 2P', cursive;
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  .start-menu {
-    display: none;
-    position: absolute;
-    bottom: 40px;
-    left: 0;
-    background: black;
-    border: 2px solid purple;
-    padding: 10px;
-  }
-  
-  .start-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .start-menu li {
-    padding: 5px 10px;
-    cursor: pointer;
-  }
-  
-  canvas {
-    border: 2px solid purple;
-  }
-  
-  #minesweeperGrid {
-    display: grid;
-    grid-template-columns: repeat(10, 30px);
-    gap: 2px;
-  }
-  
-  .minesweeper-cell {
-    width: 30px;
-    height: 30px;
-    background: #333;
-    border: 1px solid purple;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 12px;
-  }
-  
-  .minesweeper-cell.revealed {
-    background: #555;
-  }
-  
-  .minesweeper-cell.mine {
-    background: #f00;
-  }
+  margin: 0;
+  font-family: 'Press Start 2P', cursive;
+  background: black;
+  color: white;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.desktop {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 100px); /* Фиксированная ширина для иконок */
+  gap: 10px; /* Расстояние между иконками */
+  padding: 20px;
+  background-size: cover;
+  background-position: center;
+  height: calc(100vh - 40px); /* Учитываем панель задач */
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  width: 100px; /* Фиксированная ширина для иконок */
+  text-align: center;
+  margin: 10px; /* Отступы между иконками */
+  word-wrap: break-word; /* Перенос текста, если он слишком длинный */
+}
+
+.icon span {
+  margin-top: 5px; /* Отступ между иконкой и текстом */
+  font-size: 12px; /* Размер текста */
+}
+
+.icon img {
+  width: 50px;
+  height: 50px;
+}
+
+.window {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 800px;
+  background: black;
+  border: 2px solid purple;
+  box-shadow: 2px 2px 5px rgba(255, 255, 255, 0.3);
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.window.visible {
+  display: block;
+  opacity: 1;
+}
+
+.window-header {
+  background: purple;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: move;
+}
+
+.window-content {
+  padding: 10px;
+}
+
+.oval-button, .telegram-icon {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.oval-button img, .telegram-icon img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.start-button {
+  background: purple;
+  border: none;
+  color: white;
+  font-family: 'Press Start 2P', cursive;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.start-menu {
+  display: none;
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  background: black;
+  border: 2px solid purple;
+  padding: 10px;
+}
+
+.start-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.start-menu li {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+canvas {
+  border: 2px solid purple;
+}
+
+#minesweeperGrid {
+  display: grid;
+  grid-template-columns: repeat(10, 30px);
+  gap: 2px;
+}
+
+.minesweeper-cell {
+  width: 30px;
+  height: 30px;
+  background: #333;
+  border: 1px solid purple;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.minesweeper-cell.revealed {
+  background: #555;
+}
+
+.minesweeper-cell.mine {
+  background: #f00;
+}
+
+.snake-controls, .minesweeper-controls, .paint-controls, .music-controls {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+#notepadText {
+  width: 100%;
+  height: 300px;
+  background: black;
+  color: white;
+  border: 1px solid purple;
+  font-family: 'Press Start 2P', cursive;
+  padding: 10px;
+}
+
+.music-cover img {
+  width: 200px;
+  height: 200px;
+  border: 2px solid purple;
+}
+
+#musicPlayer {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.music-timeline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#musicProgress {
+  flex: 1;
+  background: purple;
+  height: 5px;
+  border-radius: 5px;
+  outline: none;
+}
+
+#musicProgress::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#musicProgress::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#playPauseBtn {
+  font-size: 20px;
+  background: purple;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+}
