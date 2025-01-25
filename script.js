@@ -10,6 +10,9 @@ function openWindow(windowId) {
   const window = document.getElementById(windowId);
   window.classList.add('visible');
   makeWindowDraggable(window);
+  if (windowId === 'musicWindow') {
+    playTrack(0); // Автоматически воспроизводить первую песню
+  }
 }
 
 // Закрытие окон
@@ -54,6 +57,71 @@ function makeWindowDraggable(window) {
   document.addEventListener('mouseup', () => {
     isDragging = false;
   });
+}
+
+// Объявляем переменные только один раз
+let currentBook = 1;
+let currentPage = 1;
+const books = {
+  1: {
+    pages: {
+      1: "Кулинарная книга великих мудростей",
+      2: "Блины \n\nCalories 823kJ / 197kcal \nProtein 7g\nCarbohydrates 21g\nFat 9g\nFiber 0.7g",
+      3: "Поместите масло в Миксерную чашу и растапливайте 2 мин/70°C/скорость 2.\n\nДобавьте молоко, муку, яйца и соль в Миксерную чашу и перемешивайте 20 сек/скорость 4. Смесь должна иметь консистенцию жидких сливок. Если смесь выглядит слишком густой, добавьте немного молока. Оставьте смесь минимум на 30 минут, прежде чем приступать к следующему шагу.\n\nСлегка смажьте сковороду сливочным маслом и разогрейте на среднем огне. Налейте маленьким половником смесь на сковороду, при этом поворачивая ее так, чтобы дно было полностью покрыто (блины должны получиться Ø 22 см и очень тонкими). Жарьте в течение 2-3 минут или до тех пор, пока на краях блина не образуется золотистая корочка. Переверните блин и жарьте его еще 1 минуту. Переложите готовый блин на тарелку и накройте кухонным полотенцем, чтобы он не остыл. Повторите те же действия с оставшейся смесью. Подавайте блины теплыми.",
+    },
+  },
+  2: {
+    pages: {
+      1: "Содержимое страницы 1 книги 2.",
+      2: "Содержимое страницы 2 книги 2.",
+    },
+  },
+  3: {
+    pages: {
+      1: "Содержимое страницы 1 книги 3.",
+      2: "Содержимое страницы 2 книги 3.",
+    },
+  },
+  4: {
+    pages: {
+      1: "Содержимое страницы 1 книги 4.",
+      2: "Содержимое страницы 2 книги 4.",
+    },
+  },
+  5: {
+    pages: {
+      1: "Содержимое страницы 1 книги 5.",
+      2: "Содержимое страницы 2 книги 5.",
+    },
+  },
+};
+
+function openBook(bookNumber) {
+  currentBook = bookNumber;
+  currentPage = 1;
+  updateBookContent();
+}
+
+function updateBookContent() {
+  const book = books[currentBook];
+  const pageContent = book.pages[currentPage] || "Страница пуста.";
+  document.getElementById('bookText').textContent = pageContent;
+  document.getElementById('currentPage').textContent = currentPage;
+}
+
+function prevPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    updateBookContent();
+  }
+}
+
+function nextPage() {
+  const book = books[currentBook];
+  if (book.pages[currentPage + 1]) {
+    currentPage++;
+    updateBookContent();
+  }
 }
 
 // Paint
@@ -269,43 +337,84 @@ const musicProgress = document.getElementById('musicProgress');
 const currentTime = document.getElementById('currentTime');
 const totalTime = document.getElementById('totalTime');
 const playPauseBtn = document.getElementById('playPauseBtn');
-let tracks = [];
+const searchInput = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
+
+let tracks = [
+  { name: 'I Just Wanna Die', url: 'media/tracks/track1.mp3', cover: 'media/covers/cover1.jpg' },
+  { name: 'разорвать небо руками', url: 'media/tracks/track2.mp3', cover: 'media/covers/cover2.jpg' },
+  { name: 'синяя сепия', url: 'media/tracks/track3.mp3', cover: 'media/covers/cover3.jpg' },
+  { name: 'Стрекоза', url: 'media/tracks/track4.mp3', cover: 'media/covers/cover4.jpg' },
+  { name: 'шато', url: 'media/tracks/track5.mp3', cover: 'media/covers/cover5.jpg' },
+  { name: 'Стороны', url: 'media/tracks/track6.mp3', cover: 'media/covers/cover6.jpg' },
+  { name: 'Стану заботиться', url: 'media/tracks/track7.mp3', cover: 'media/covers/cover7.jpg' },
+  { name: 'Майор Том', url: 'media/tracks/track8.mp3', cover: 'media/covers/cover8.jpg' },
+  { name: 'Hill', url: 'media/tracks/track9.mp3', cover: 'media/covers/cover9.jpg' },
+  { name: 'Камень в Каабе', url: 'media/tracks/track10.mp3', cover: 'media/covers/cover10.jpg' },
+  { name: 'Windowz8', url: 'media/tracks/track11.mp3', cover: 'media/covers/cover11.jpg' },
+  { name: 'Ублюдок', url: 'media/tracks/track12.mp3', cover: 'media/covers/cover12.jpg' },
+];
 let currentTrack = 0;
 
-// Пример загрузки треков (добавь свои треки и обложки)
-tracks = [
-  {
-    file: new File([], 'I Just Wanna Die'),
-    url: 'media/tracks/track1.mp3', // Путь к треку
-    cover: 'media/covers/cover1.jpg', // Путь к обложке
-  },
-  {
-    file: new File([], 'Разорвать небо руками'),
-    url: 'media/tracks/track2.mp3', // Путь к треку
-    cover: 'media/covers/cover1.jpg', // Путь к обложке
-  },
-  {
-    file: new File([], 'синяя сепия'),
-    url: 'media/tracks/track3.mp3', // Путь к треку
-    cover: 'media/covers/cover1.jpg', // Путь к обложке
-  },
-];
+let filteredTracks = []; // Переменная для хранения отфильтрованных треков
+
+function searchTracks() {
+  const query = searchInput.value.toLowerCase();
+  const searchResults = document.getElementById('searchResults');
+  searchResults.innerHTML = '';
+
+  filteredTracks = tracks.filter((track) =>
+    track.name.toLowerCase().includes(query)
+  );
+
+  if (filteredTracks.length > 0) {
+    filteredTracks.forEach((track, index) => {
+      const result = document.createElement('div');
+      result.textContent = track.name;
+      result.onclick = () => playTrackFromSearch(index); // Используем новую функцию
+      searchResults.appendChild(result);
+    });
+    searchResults.style.display = 'block'; // Показываем окно подсказок
+  } else {
+    searchResults.style.display = 'none'; // Скрываем окно подсказок, если результатов нет
+  }
+}
+
+function playTrackFromSearch(index) {
+  if (index < 0 || index >= filteredTracks.length) return;
+
+  // Находим выбранный трек в отфильтрованном списке
+  const selectedTrack = filteredTracks[index];
+
+  // Находим индекс этого трека в основном массиве tracks
+  const trackIndexInMainList = tracks.findIndex(
+    (track) => track.name === selectedTrack.name
+  );
+
+  // Воспроизводим трек из основного списка
+  playTrack(trackIndexInMainList);
+}
 
 function playTrack(index) {
   if (index < 0 || index >= tracks.length) return;
   currentTrack = index;
   musicPlayer.src = tracks[currentTrack].url;
   musicCover.src = tracks[currentTrack].cover;
-  musicTitle.textContent = tracks[currentTrack].file.name;
+  musicTitle.textContent = tracks[currentTrack].name;
   musicPlayer.play();
+  playPauseBtn.textContent = '⏸';
+
+  // Закрываем окно подсказок
+  const searchResults = document.getElementById('searchResults');
+  searchResults.style.display = 'none'; // Скрываем окно подсказок
 }
 
 function prevTrack() {
-  playTrack(currentTrack - 1);
+  playTrack((currentTrack - 1 + tracks.length) % tracks.length);
 }
 
 function nextTrack() {
-  playTrack(currentTrack + 1);
+  playTrack((currentTrack + 1) % tracks.length);
 }
 
 function shuffleTracks() {
@@ -340,6 +449,7 @@ function formatTime(seconds) {
   const secs = Math.floor(seconds % 60);
   return `${minutes}:${secs < 10 ? '0' : ''}${secs}`;
 }
+
 
 // Смена обоев
 function changeWallpaper() {

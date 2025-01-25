@@ -46,6 +46,35 @@
       <img src="h-os.jpg" alt="OS">
       <span>OS</span>
     </div>
+    <div class="icon" onclick="openWindow('booksWindow')">
+      <img src="book.jpg" alt="Books">
+      <span>Books</span>
+    </div>
+  </div>
+
+  <!-- Окно "Books" -->
+  <div class="window" id="booksWindow">
+    <div class="window-header">
+      <span>Books</span>
+      <button onclick="closeWindow('booksWindow')">×</button>
+    </div>
+    <div class="window-content">
+      <div class="books-buttons">
+        <button class="music-button" onclick="openBook(1)">Кулинарная книга</button>
+        <button class="music-button" onclick="openBook(2)">Книга 2</button>
+        <button class="music-button" onclick="openBook(3)">Книга 3</button>
+        <button class="music-button" onclick="openBook(4)">Книга 4</button>
+        <button class="music-button" onclick="openBook(5)">Книга 5</button>
+      </div>
+      <div class="book-content">
+        <div id="bookText" class="book-text"></div>
+        <div class="book-controls">
+          <button class="music-button" onclick="prevPage()">← Назад</button>
+          <span>Страница: <span id="currentPage">1</span></span>
+          <button class="music-button" onclick="nextPage()">Вперед →</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Окно "Развлечения" -->
@@ -109,7 +138,7 @@
     <div class="window-content">
       <canvas id="snakeGame" width="400" height="400"></canvas>
       <div class="snake-controls">
-        <button onclick="resetSnakeGame()">Сбросить</button>
+        <button class="music-button" onclick="resetSnakeGame()">Сбросить</button>
         <span>Счет: <span id="snakeScore">0</span></span>
         <span>Уровень: <span id="snakeLevel">1</span></span>
       </div>
@@ -125,7 +154,7 @@
     <div class="window-content">
       <div id="minesweeperGrid"></div>
       <div class="minesweeper-controls">
-        <button onclick="resetMinesweeper()">Сбросить</button>
+        <button class="music-button" onclick="resetMinesweeper()">Сбросить</button>
       </div>
     </div>
   </div>
@@ -140,7 +169,7 @@
       <div class="paint-controls">
         <input type="color" id="paintColor" value="#ffffff">
         <input type="range" id="brushSize" min="1" max="20" value="5">
-        <button onclick="clearCanvas()">Очистить</button>
+        <button class="music-button" onclick="clearCanvas()">Очистить</button>
       </div>
       <canvas id="paintCanvas" width="600" height="400"></canvas>
     </div>
@@ -154,8 +183,8 @@
     </div>
     <div class="window-content">
       <textarea id="notepadText" placeholder="Введите текст..."></textarea>
-      <button onclick="saveNotepad()">Сохранить</button>
-      <button onclick="loadNotepad()">Загрузить</button>
+      <button class="music-button" onclick="saveNotepad()">Сохранить</button>
+      <button class="music-button" onclick="loadNotepad()">Загрузить</button>
     </div>
   </div>
 
@@ -166,6 +195,10 @@
       <button onclick="closeWindow('musicWindow')">×</button>
     </div>
     <div class="window-content">
+      <div class="music-search">
+        <input type="text" id="searchInput" placeholder="Поиск песен..." oninput="searchTracks()">
+        <div id="searchResults" class="search-results"></div>
+      </div>
       <div class="music-cover">
         <img id="musicCover" src="" alt="Обложка">
       </div>
@@ -175,10 +208,10 @@
         <span id="currentTime">0:00</span> / <span id="totalTime">0:00</span>
       </div>
       <div class="music-controls">
-        <button onclick="prevTrack()">Назад</button>
-        <button onclick="togglePlay()" id="playPauseBtn">⏵</button>
-        <button onclick="nextTrack()">Вперед</button>
-        <button onclick="shuffleTracks()">Случайно</button>
+        <button class="music-button" onclick="prevTrack()">Назад</button>
+        <button class="music-button" onclick="togglePlay()" id="playPauseBtn">⏵</button>
+        <button class="music-button" onclick="nextTrack()">Вперед</button>
+        <button class="music-button" onclick="shuffleTracks()">Случайно</button>
       </div>
     </div>
   </div>
@@ -218,6 +251,31 @@
     </div>
   </div>
 
+  <!-- Окно "Books" -->
+  <div class="window" id="booksWindow">
+    <div class="window-header">
+      <span>Books</span>
+      <button onclick="closeWindow('booksWindow')">×</button>
+    </div>
+    <div class="window-content">
+      <div class="books-buttons">
+        <button class="music-button" onclick="openBook(1)">Книга 1</button>
+        <button class="music-button" onclick="openBook(2)">Книга 2</button>
+        <button class="music-button" onclick="openBook(3)">Книга 3</button>
+        <button class="music-button" onclick="openBook(4)">Книга 4</button>
+        <button class="music-button" onclick="openBook(5)">Книга 5</button>
+      </div>
+      <div class="book-content">
+        <textarea id="bookText" placeholder="Введите текст..."></textarea>
+        <div class="book-controls">
+          <button class="music-button" onclick="prevPage()">← Назад</button>
+          <span>Страница: <span id="currentPage">1</span></span>
+          <button class="music-button" onclick="nextPage()">Вперед →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Панель задач -->
   <div class="taskbar">
     <button class="start-button" onclick="toggleStartMenu()">Пуск</button>
@@ -232,6 +290,7 @@
         <li onclick="openWindow('musicWindow')">Музыка</li>
         <li onclick="openWindow('aboutWindow')">О нас</li>
         <li onclick="openWindow('osWindow')">OS</li>
+        <li onclick="openWindow('booksWindow')">Books</li>
         <li onclick="changeWallpaper()">Сменить обои</li>
       </ul>
     </div>

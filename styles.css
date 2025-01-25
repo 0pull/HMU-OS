@@ -2,19 +2,18 @@ body {
   margin: 0;
   font-family: 'Press Start 2P', cursive;
   background: black;
-  color: white;
+  color: rgb(255, 255, 255);
   height: 100vh;
   overflow: hidden;
 }
 
 .desktop {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, 100px); /* Фиксированная ширина для иконок */
-  gap: 10px; /* Расстояние между иконками */
+  display: flex;
+  flex-wrap: wrap;
   padding: 20px;
   background-size: cover;
   background-position: center;
-  height: calc(100vh - 40px); /* Учитываем панель задач */
+  height: calc(100vh - 40px);
 }
 
 .icon {
@@ -22,20 +21,20 @@ body {
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  width: 100px; /* Фиксированная ширина для иконок */
+  width: 100px;
   text-align: center;
-  margin: 10px; /* Отступы между иконками */
-  word-wrap: break-word; /* Перенос текста, если он слишком длинный */
-}
-
-.icon span {
-  margin-top: 5px; /* Отступ между иконкой и текстом */
-  font-size: 12px; /* Размер текста */
+  margin: 10px;
+  word-wrap: break-word;
 }
 
 .icon img {
   width: 50px;
   height: 50px;
+}
+
+.icon span {
+  margin-top: 5px;
+  font-size: 12px;
 }
 
 .window {
@@ -65,6 +64,19 @@ body {
   cursor: move;
 }
 
+.window-header span {
+  color: white;
+  font-size: 14px;
+}
+
+.window-header button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 .window-content {
   padding: 10px;
 }
@@ -80,6 +92,10 @@ body {
   width: 30px;
   height: 30px;
   margin-right: 10px;
+}
+
+.oval-button span, .telegram-icon span {
+  font-size: 12px;
 }
 
 .taskbar {
@@ -121,6 +137,12 @@ body {
 .start-menu li {
   padding: 5px 10px;
   cursor: pointer;
+  color: white;
+  font-size: 12px;
+}
+
+.start-menu li:hover {
+  background: purple;
 }
 
 canvas {
@@ -143,6 +165,7 @@ canvas {
   justify-content: center;
   cursor: pointer;
   font-size: 12px;
+  color: white;
 }
 
 .minesweeper-cell.revealed {
@@ -221,4 +244,129 @@ canvas {
   color: white;
   padding: 5px 10px;
   cursor: pointer;
+}
+
+.books-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.book-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.book-text {
+  width: 100%;
+  height: 300px;
+  background: black;
+  color: white;
+  border: 1px solid purple;
+  font-family: 'Press Start 2P', cursive;
+  padding: 10px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+}
+
+.book-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Стили для кнопок */
+.music-button {
+  background-color: purple;
+  color: white;
+  border: 2px solid white;
+  font-family: 'Press Start 2P', cursive;
+  padding: 5px 10px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+}
+
+.music-button:hover {
+  background-color: white;
+  color: purple;
+}
+
+/* Стили для кнопки "Очистить" в Paint */
+.clear-button {
+  background-color: purple;
+  color: white;
+  border: 2px solid white;
+  font-family: 'Press Start 2P', cursive;
+  padding: 5px 10px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+}
+
+.clear-button:hover {
+  background-color: white;
+  color: purple;
+}
+
+/* Стили для строки поиска песен */
+#searchInput {
+  background-color: white; /* Белый фон */
+  color: black; /* Черный текст */
+  border: 2px solid purple; /* Фиолетовая рамка */
+  font-family: 'Press Start 2P', cursive; /* Пиксельный шрифт */
+  font-size: 12px; /* Размер шрифта */
+  padding: 5px 10px; /* Отступы внутри поля */
+  width: 100%; /* Ширина поля */
+  box-sizing: border-box; /* Учитываем padding в ширине */
+  outline: none; /* Убираем стандартный outline */
+}
+
+#searchInput::placeholder {
+  color: purple; /* Фиолетовый цвет текста placeholder */
+  opacity: 1; /* Убедимся, что placeholder виден */
+}
+
+#searchInput:focus {
+  border-color: white; /* Белая рамка при фокусе */
+  background-color: purple; /* Фиолетовый фон при фокусе */
+  color: white; /* Белый текст при фокусе */
+}
+
+#searchInput:focus::placeholder {
+  color: white; /* Белый цвет placeholder при фокусе */
+}
+
+#searchResults {
+  display: none; /* Скрываем окно подсказок по умолчанию */
+  position: absolute;
+  background: white;
+  border: 2px solid purple;
+  color: black;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  width: 100%;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+#searchResults div {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+#searchResults div:hover {
+  background: purple;
+  color: white;
 }
